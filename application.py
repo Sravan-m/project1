@@ -1,6 +1,6 @@
 import os
 import sys
-#import requests
+import requests
 import json
 
 from flask import Flask,render_template,request,session,redirect,url_for,flash
@@ -97,8 +97,8 @@ def signup():
 
 @app.route("/registration",methods=["POST"])
 def registration():
-    rfname=request.form.get("first_name")
-    rlname=request.form.get("last_name")
+    rfname=request.form.get("firstName")
+    rlname=request.form.get("lastName")
     remail=request.form.get("email")
     rpassword=request.form.get("password")
     rcpassword=request.form.get("confirm_password")
@@ -154,7 +154,7 @@ def registration():
                     print('Inserting user')
                     now = datetime.now()
                     db = scoped_session(sessionmaker(bind=engine))
-                    row = Users(email=remail,fname=rfname,lname=rlname,pwrd=rpassword,date=now)
+                    row = Users(email=remail,fname=rfname,lname=rlname,pwd=rpassword,date=now)
                     db.add(row)
                     db.commit()
                     return render_template('index.html', email=None)
