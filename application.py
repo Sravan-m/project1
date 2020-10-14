@@ -1,6 +1,6 @@
 import os
 import sys
-import requests
+#import requests
 import json
 
 from flask import Flask,render_template,request,session,redirect,url_for,flash
