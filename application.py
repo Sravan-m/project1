@@ -365,7 +365,7 @@ def booksearch(isbn):
                 #     print(f"added{book.title} with number {book.isbn} written by {book.author} published in the year {book.year}")
                 booksquery = db.query(Reviews).filter(Reviews.isbn==isbn)
                 print(booksquery)
-                res = requests.get("https://www.goodreads.com/book/review_counts.json", params={"key": "aLvwXAjKk7bi8mYKzi0mw", "isbns": isbn})
+                res = requests.get("https://www.goodreads.com/book/review_counts.json", params={"key": "JWBbCiXuL8zmUbVJc68rw", "isbns": isbn})
                 data = res.text
                 parsed = json.loads(data)
                 print(parsed)
