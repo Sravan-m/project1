@@ -182,7 +182,144 @@ def search():
     title=request.form.get("title")
     author=request.form.get("author")
     # print("isbn = "+isbn,", title = "+title,", author = "+author)
-    try:
+
+    if isbn!="" and title=="" and author=="":
+        try:
+            db = scoped_session(sessionmaker(bind=engine))
+            isbn = '%'+isbn+'%'
+            session['isbn'] = isbn
+            session['title'] = None
+            session['author'] = None
+            query = db.query(Books).filter(Books.isbn.ilike(isbn))
+            if query != None:
+                # r = query.all()
+                # print(r)
+                # for book in r:
+                #     print(f"added{book.title} with number {book.isbn} written by {book.author} published in the year {book.year}")
+                return render_template('books.html',row = query.all(),email=session['email'])
+            else :
+                flash("there are no books available with the specified details,try with more specific details")
+                return render_template('search.html',email=session['email'])
+        except SQLAlchemyError as e:
+            print(e)
+            return render_template('fail.html',path='./static/css/styles.min.css')
+        finally:
+            db.close()
+    elif isbn=="" and title!="" and author=="":
+        try:
+            db = scoped_session(sessionmaker(bind=engine))
+            title = '%'+title+'%'
+            session['title'] = title
+            session['author'] = None
+            session['isbn'] = None
+            query = db.query(Books).filter(Books.title.ilike(title))
+            if query != None:
+                # r = query.all()
+                # print(r)
+                # for book in r:
+                #     print(f"added{book.title} with number {book.isbn} written by {book.author} published in the year {book.year}")
+                return render_template('books.html',row = query.all(),email=session['email'])
+            else :
+                flash("there are no books available with the specified details,try with more specific details")
+                return render_template('search.html',email=session['email'])
+        except SQLAlchemyError as e:
+            print(e)
+            return render_template('fail.html',path='./static/css/styles.min.css')
+        finally:
+            db.close()
+    elif isbn=="" and title=="" and author!="":
+        try:
+            db = scoped_session(sessionmaker(bind=engine))
+            author = '%'+author+'%'
+            session['author'] = author
+            session['isbn'] = None
+            session['title'] = None
+            query = db.query(Books).filter(Books.author.ilike(author))
+            if query != None:
+                # r = query.all()
+                # print(r)
+                # for book in r:
+                #     print(f"added{book.title} with number {book.isbn} written by {book.author} published in the year {book.year}")
+                return render_template('books.html',row = query.all(),email=session['email'])
+            else :
+                flash("there are no books available with the specified details,try with more specific details")
+                return render_template('search.html',email=session['email'])
+        except SQLAlchemyError as e:
+            print(e)
+            return render_template('fail.html',path='./static/css/styles.min.css')
+        finally:
+            db.close()
+    elif isbn!="" and title!="" and author=="":
+        try:
+            db = scoped_session(sessionmaker(bind=engine))
+            title = '%'+title+'%'
+            isbn = '%'+isbn+'%'
+            session['title'] = title
+            session['isbn'] = isbn
+            session['author'] = None
+            query = db.query(Books).filter(or_(Books.title.ilike(title),Books.isbn.ilike(isbn)))
+            if query != None:
+                # r = query.all()
+                # print(r)
+                # for book in r:
+                #     print(f"added{book.title} with number {book.isbn} written by {book.author} published in the year {book.year}")
+                return render_template('books.html',row = query.all(),email=session['email'])
+            else :
+                flash("there are no books available with the specified details,try with more specific details")
+                return render_template('search.html',email=session['email'])
+        except SQLAlchemyError as e:
+            print(e)
+            return render_template('fail.html',path='./static/css/styles.min.css')
+        finally:
+            db.close()
+    elif isbn!="" and title=="" and author!="":
+        try:
+            db = scoped_session(sessionmaker(bind=engine))
+            isbn = '%'+isbn+'%'
+            author = '%'+author+'%'
+            session['author'] = author
+            session['isbn'] = isbn
+            session['title'] = None
+            query = db.query(Books).filter(or_(Books.isbn.ilike(isbn),Books.author.ilike(author)))
+            if query != None:
+                # r = query.all()
+                # print(r)
+                # for book in r:
+                #     print(f"added{book.title} with number {book.isbn} written by {book.author} published in the year {book.year}")
+                return render_template('books.html',row = query.all(),email=session['email'])
+            else :
+                flash("there are no books available with the specified details,try with more specific details")
+                return render_template('search.html',email=session['email'])
+        except SQLAlchemyError as e:
+            print(e)
+            return render_template('fail.html',path='./static/css/styles.min.css')
+        finally:
+            db.close()
+    elif isbn=="" and title!="" and author!="":
+        try:
+            db = scoped_session(sessionmaker(bind=engine))
+            title = '%'+title+'%'
+            author = '%'+author+'%'
+            session['title'] = title
+            session['author'] = isbn
+            session['isbn'] = None
+            query = db.query(Books).filter(or_(Books.title.ilike(title),Books.author.ilike(author)))
+            if query != None:
+                # r = query.all()
+                # print(r)
+                # for book in r:
+                #     print(f"added{book.title} with number {book.isbn} written by {book.author} published in the year {book.year}")
+                return render_template('books.html',row = query.all(),email=session['email'])
+            else :
+                flash("there are no books available with the specified details,try with more specific details")
+                return render_template('search.html',email=session['email'])
+        except SQLAlchemyError as e:
+            print(e)
+            return render_template('fail.html',path='./static/css/styles.min.css')
+        finally:
+            db.close()
+    else:
+        try:
             db = scoped_session(sessionmaker(bind=engine))
             isbn = '%'+isbn+'%'
             title = '%'+title+'%'
@@ -200,10 +337,10 @@ def search():
             else :
                 flash("there are no books available with the specified details,try with more specific details")
                 return render_template('search.html',email=session['email'])
-    except SQLAlchemyError as e:
+        except SQLAlchemyError as e:
             print(e)
             return render_template('fail.html',path='./static/css/styles.min.css')
-    finally:
+        finally:
             db.close()
 
 @app.route("/searchtest")
