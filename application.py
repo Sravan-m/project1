@@ -92,8 +92,8 @@ def register():
 
     if "email" in session:
         print("session present while registrering")
-        return render_template('register.html',email = session['email'])
-    return render_template('register.html',email=None)
+        return render_template('signup.html',email = session['email'])
+    return render_template('signup.html',email=None)
 
 
 
@@ -132,12 +132,12 @@ def registration():
                 # session['email'] = name.email
                 flash('Incorrect password, try again')
                 # s = session['email']
-                return redirect(url_for('register'))
+                return redirect(url_for('signup'))
             else:
                 print('User not registered,register before you login')
                 flash('User not registered,register before you login')
-                # return redirect(url_for('register'))
-                return redirect(url_for('register'))
+                # return redirect(url_for('signup'))
+                return redirect(url_for('signup'))
         except SQLAlchemyError as e:
             print(e)
             return render_template('fail.html',path='./static/css/styles.min.css')
@@ -154,7 +154,7 @@ def registration():
                 if query.first() != None:
                     print('User already exists')
                     flash('User already exists')
-                    return redirect(url_for('register'))
+                    return redirect(url_for('signup'))
                 else:
                     print('Inserting user')
                     now = datetime.now()
@@ -173,8 +173,8 @@ def registration():
         else:
             print("confirmation does not match")
             flash('confirmation password does not match with the Entered password, Try again')
-            return redirect(url_for('register'))
-            # return redirect(url_for('register'))
+            return redirect(url_for('signup'))
+            # return redirect(url_for('signup'))
 
     #     print(remail+" , "+rfname+" , "+rlname,file=sys.stdout)
     #     print(remail+" , "+rfname+" , "+rlname, file=sys.stderr)
