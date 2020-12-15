@@ -1,4 +1,4 @@
-document.getElementById('register').addEventListener('click', e =>{
+document.getElementById('signup').addEventListener('click', e =>{
   let mail = document.forms["myForm"]["email"].value;
   let pwrd = document.forms["myForm"]["password"].value;
   let passw = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&.])[A-Za-z\d$@$!%*?&.]{6, 20}/;

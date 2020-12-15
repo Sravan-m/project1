@@ -83,7 +83,7 @@ def home():
     return render_template('layout.html',email = None)
 
 @app.route("/signup")
-def register():
+def signup():
     if not engine.dialect.has_table(engine, "USERS"):
         Users.__table__.create(bind=engine, checkfirst=True)
 
@@ -144,7 +144,7 @@ def registration():
         finally:
             db.close()
     else:
-        print("in register method")
+        print("in signup method")
         if rpassword == rcpassword:
             # data = {'a': 5566, 'b': 9527, 'c': 183}
             try:
