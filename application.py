@@ -405,6 +405,12 @@ def review(isbn,review,rating,email,fname):
     print(email)
     now = datetime.now()
     print(fname)
+
+    print('review length of isbn',len(isbn))
+    while len(isbn)<10:
+        isbn = "0"+isbn
+    print("review isbn = ",isbn)
+
     # author = session['author']
     # print("author =",session['author'])
     # title = session['title']
