@@ -1,37 +1,37 @@
 {% extends "layout.html" %}
 
 {% block body %}
-<br>
-<br>
-	{% with msg = get_flashed_messages() %}
-		{% if msg %}
-			{%for i in msg %}
-			<div class="alert alert-warning alert-dismissible fade show" role="alert">
-				<strong>{{ i }}</strong>
-				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-				<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-			{% endfor %}
-		{% endif %}
-	{% endwith %}
+
+{% with msg = get_flashed_messages() %}
+        {% if msg %}
+          {% for i in msg %}
+          <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>{{i}}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+      {% endfor %}
+      {% endif %}
+{% endwith %}
+
 <br>
 <br>
 <table class="table">
-	<thead class="thead-dark">
-		<tr>
-			<th scope="col">ISBN</th>
-			<th scope="col">Title</th>
-		</tr>
-	</thead>
-	<tbody>
-		{% for r in row %}
-		<tr>
-			<td><a href="{{ url_for('booksearch',isbn = r.isbn) }}">{{ r.isbn }}</a></td>
-			<td><a href="{{ url_for('booksearch',isbn = r.isbn) }}">{{ r.title }}</a></td>
-		</tr>
-		{% endfor %}
-	</tbody>
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">ISBN</th>
+      <th scope="col">Title</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for r in row %}
+    <tr>
+      <td><a href="{{url_for('booksearch',isbn = r.isbn)}}">{{r.isbn}}</a></td>
+      <td><a href="{{url_for('booksearch',isbn = r.isbn)}}">{{r.title}}</a></td>
+    </tr>
+    {% endfor %}
+  </tbody>
 </table>
 </div>
 {% endblock %}
