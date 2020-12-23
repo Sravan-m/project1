@@ -101,7 +101,7 @@ body {
   font-size: 15px;
 }
 .signup-form h2 {
-  color: #636363;
+  color: green;
   margin: 0 0 15px;
   position: relative;
   text-align: center;
@@ -111,7 +111,7 @@ body {
   content: "";
   height: 2px;
   width: 30%;
-  background: #d4d4d4;
+  background: #DEB887;
   position: absolute;
   top: 50%;
   z-index: 2;
@@ -123,7 +123,7 @@ body {
   right: 0;
 }
 .signup-form .hint-text {
-  color: #999;
+  color: red;
   margin-bottom: 30px;
   text-align: center;
 }
@@ -131,7 +131,7 @@ body {
   color: #999;
   border-radius: 3px;
   margin-bottom: 15px;
-  background: #f2f3f7;
+  background: #DEB887;
   box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
   padding: 30px;
 }
@@ -168,4 +168,4 @@ body {
   text-decoration: underline;
 }
 
-/*# sourceMappingURL=styles.min.css.map */
+/*# sourceMappingURL=styles1.min.css.map */
