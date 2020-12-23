@@ -82,8 +82,8 @@ def home():
         return render_template('index.html', email=session['email'])
     return render_template('layout.html',email = None)
 
-@app.route("/signup")
-def signup():
+@app.route("/register")
+def register():
     if not engine.dialect.has_table(engine, "USERS"):
         Users.__table__.create(bind=engine, checkfirst=True)
 
@@ -92,15 +92,15 @@ def signup():
 
     if "email" in session:
         print("session present while registrering")
-        return render_template('signup.html',email = session['email'])
-    return render_template('signup.html',email=None)
+        return render_template('register.html',email = session['email'])
+    return render_template('register.html',email=None)
 
 
 
 @app.route("/registration",methods=["POST"])
 def registration():
-    rfname=request.form.get("firstName")
-    rlname=request.form.get("lastName")
+    rfname=request.form.get("first_name")
+    rlname=request.form.get("last_name")
     remail=request.form.get("email")
     rpassword=request.form.get("password")
     rcpassword=request.form.get("confirm_password")
@@ -132,19 +132,19 @@ def registration():
                 # session['email'] = name.email
                 flash('Incorrect password, try again')
                 # s = session['email']
-                return redirect(url_for('signup'))
+                return redirect(url_for('register'))
             else:
                 print('User not registered,register before you login')
                 flash('User not registered,register before you login')
-                # return redirect(url_for('signup'))
-                return redirect(url_for('signup'))
+                # return redirect(url_for('register'))
+                return redirect(url_for('register'))
         except SQLAlchemyError as e:
             print(e)
             return render_template('fail.html',path='./static/css/styles.min.css')
         finally:
             db.close()
     else:
-        print("in signup method")
+        print("in register method")
         if rpassword == rcpassword:
             # data = {'a': 5566, 'b': 9527, 'c': 183}
             try:
@@ -154,7 +154,7 @@ def registration():
                 if query.first() != None:
                     print('User already exists')
                     flash('User already exists')
-                    return redirect(url_for('signup'))
+                    return redirect(url_for('register'))
                 else:
                     print('Inserting user')
                     now = datetime.now()
@@ -173,8 +173,8 @@ def registration():
         else:
             print("confirmation does not match")
             flash('confirmation password does not match with the Entered password, Try again')
-            return redirect(url_for('signup'))
-            # return redirect(url_for('signup'))
+            return redirect(url_for('register'))
+            # return redirect(url_for('register'))
 
     #     print(remail+" , "+rfname+" , "+rlname,file=sys.stdout)
     #     print(remail+" , "+rfname+" , "+rlname, file=sys.stderr)
