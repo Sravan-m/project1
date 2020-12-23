@@ -139,7 +139,8 @@ def registration():
                 # return redirect(url_for('register'))
                 return redirect(url_for('register'))
         except SQLAlchemyError as e:
-            print(e)
+            #print(e)
+            print(app.config["DATABASE_URL"])
             return render_template('fail.html',path='./static/css/styles.min.css')
         finally:
             db.close()
