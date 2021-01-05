@@ -110,7 +110,7 @@ def registration():
             query = db.query(Users).filter(Users.email == remail)
             name = query.first()
             # print(name.email)
-            if name is not None and name.email == remail and name.pwd == rpassword:
+            if name is not None and name.email == remail and name.pwrd == rpassword:
                 print('session created')
                 session['email'] = name.email
                 session['fname'] = name.fname
@@ -122,7 +122,7 @@ def registration():
                     return redirect(url_for('main', email=user))
 
                 return render_template('search.html', email=user)
-            elif name is not None and name.email == remail and name.pwd != rpassword:
+            elif name is not None and name.email == remail and name.pwrd != rpassword:
                 print('Incorrect password, try again')
                 # session['email'] = name.email
                 flash('Incorrect password, try again')
@@ -154,7 +154,7 @@ def registration():
                     print('Inserting user')
                     now = datetime.now()
                     db = scoped_session(sessionmaker(bind=engine))
-                    row = Users(email=remail,fname=rfname,lname=rlname,pwd=rpassword,date=now)
+                    row = Users(email=remail,fname=rfname,lname=rlname,pwrd=rpassword,date=now)
                     db.add(row)
                     db.commit()
                     return render_template('index.html', email=None)
