@@ -45,7 +45,7 @@ class Users(Base):
     email = Column(String, primary_key=True, nullable=False)
     fname = Column(String)
     lname = Column(String)
-    pwd = Column(String)
+    pwrd = Column(String)
     date = Column(DateTime)
 
 class Admin(Base):
